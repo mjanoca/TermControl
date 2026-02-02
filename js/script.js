@@ -6,6 +6,7 @@ const btn_input = document.querySelector('#btn-cadastrar');
 const texto_texto = document.querySelector(".task");
 const ultimo_objeto_lido = document.querySelector(".ultimo-objeto-lido h1")
 const objetos_lidos = [];
+const obj_lidos = new Set() // Esse set substituirá o array objetos_lidos
 let objetos = [];
 
 carregar();
@@ -49,6 +50,17 @@ Alvo: objetos_lidos
 */
 function objetosLidos(objeto){
     objetos_lidos.push(objeto);
+    obj_lidos.add(objeto)
+    salvarNoLocalStorage(obj_lidos)
+}
+
+/*
+Função: Armazenar os objetos lidos em localStorage para posterior busca de dados
+Alvo: objt_lidos
+*/
+function salvarNoLocalStorage(objetos){
+    const objetosNasMesas = Array.from(objetos);
+    localStorage.setItem("objetosNasMesas", JSON.stringify(objetosNasMesas))
 }
 
 /*
