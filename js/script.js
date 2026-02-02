@@ -11,8 +11,6 @@ let objetos = [];
 
 carregar();
 
-document.addEventListener("load", recuperarNoLocalStorage())
-
 btn_input.addEventListener('click', (e)=>{
     e.preventDefault();
     const objeto = texto_texto.value;
@@ -68,8 +66,8 @@ function salvarNoLocalStorage(objetos){
 Função: Recuperar obejtos do localStorage
 Alvo: objt_lidos
 */
-function recuperarNoLocalStorage(){
-    const objetos = JSON.parse(localStorage.getItem('objetosNasMesas'));
+async function recuperarNoLocalStorage(){
+    const objetos = await JSON.parse(localStorage.getItem('objetosNasMesas'));
     for(let item of objetos){
         objetosNasMesas.push(item)
     }
