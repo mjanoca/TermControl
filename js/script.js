@@ -68,8 +68,11 @@ function salvarNoLocalStorage(objetos){
 Função: Recuperar obejtos do localStorage
 Alvo: objt_lidos
 */
-function recuperarNoLocalStorage(objetos){
-    objetosNasMesas = JSON.parse(localStorage.getItem("objetosNasMesas"));
+function recuperarNoLocalStorage(){
+    const objetos = JSON.parse(localStorage.getItem('objetosNasMesas'));
+    for(let item of objetos){
+        objetosNasMesas.push(item)
+    }
 }
 
 
