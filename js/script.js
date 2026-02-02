@@ -5,11 +5,13 @@ Ferramenta auxiliar para a procura de objetos com o prazo de entrega para o dia 
 const btn_input = document.querySelector('#btn-cadastrar');
 const texto_texto = document.querySelector(".task");
 const ultimo_objeto_lido = document.querySelector(".ultimo-objeto-lido h1")
-const objetos_lidos = [];
-const obj_lidos = new Set() // Esse set substituirá o array objetos_lidos
+const obj_lidos = new Set();
+const objetosNasMesas = [];
 let objetos = [];
 
 carregar();
+
+document.addEventListener("load", recuperarNoLocalStorage())
 
 btn_input.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -49,7 +51,6 @@ Função: Popular o alvo com os objetos lidos pelo usuário
 Alvo: objetos_lidos
 */
 function objetosLidos(objeto){
-    objetos_lidos.push(objeto);
     obj_lidos.add(objeto)
     salvarNoLocalStorage(obj_lidos)
 }
@@ -62,6 +63,15 @@ function salvarNoLocalStorage(objetos){
     const objetosNasMesas = Array.from(objetos);
     localStorage.setItem("objetosNasMesas", JSON.stringify(objetosNasMesas))
 }
+
+/*
+Função: Recuperar obejtos do localStorage
+Alvo: objt_lidos
+*/
+function recuperarNoLocalStorage(objetos){
+    objetosNasMesas = JSON.parse(localStorage.getItem("objetosNasMesas"));
+}
+
 
 /*
 Função: Inserir as informações dos objetos com vencimento no dia através do carregamento do arquivo .csv
