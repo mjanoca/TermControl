@@ -14,7 +14,12 @@ carregar();
 btn_input.addEventListener('click', (e)=>{
     e.preventDefault();
     const objeto = texto_texto.value;
-    verificarObjeto(objeto)
+    if (objeto ==="recuperar"){
+        recuperarNoLocalStorage();
+        limparInput();
+    }else{
+        verificarObjeto(objeto)
+    }
     }
 )
 /*
