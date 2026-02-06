@@ -5,26 +5,44 @@ const objPendentes = [];
 
 carregarArquivos();
 
-btnMesclar.addEventListener("click", mesclar());
+btnMesclar.addEventListener("click", mesclar1()); 
 
- function mesclar() {
+/*
+Faz a leitura dos arquivos selecionados em um input e varre as informações a procura dos objetos e seus vencimentos populando o array objPendentes com os resultados
+encontrados.
+*/
+function mesclar() {
    file1.addEventListener("change", (e) => {
     for (let i = 0; i <= totalDeArquivosCarregados - 1; i++) {
       let file = e.target.files[i];
       if (file) {
         let reader = new FileReader();
          reader.addEventListener("load", (e) => {
-          let result = e.target.result;
-          //console.log(typeof(result))
-          console.log(...result.match(/.{11}BR.{13}/gi));
-          let string = `${result.match(/.{11}BR.{13}/gi)}`;
-          console.log(...string.split(" "))
-          //objPendentes.push(...result.match(/.{11}BR.{13}/gi));
+          let result = e.target.result
+          objPendentes.push(criarObjeto(result));
+          console.log(objPendentes)
         });
         reader.readAsText(file);
       }
     }
   });
+}
+
+async function mesclar1(){
+  const result = await fetch("arq.csv")
+  const dados = await result.text()
+  for (let item of dados){
+    console.log(item)
+    criarObjeto(item)
+  }
+}
+
+
+function criarObjeto(result){
+  return {
+    "codigo": result.match(/.{11}BR/gi),
+    "vcto":result.match(/.{6}2026/gi)
+  }
 }
 
 function carregarArquivos() {
