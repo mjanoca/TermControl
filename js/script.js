@@ -13,7 +13,7 @@ carregar();
 
 btn_input.addEventListener('click', (e)=>{
     e.preventDefault();
-    const objeto = texto_texto.value;
+    const objeto = texto_texto.value.toUpperCase();
     if (objeto ==="recuperar"){
         recuperarNoLocalStorage();
         limparInput();
